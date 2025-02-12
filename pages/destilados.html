@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acordeón de Destilados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #111;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .accordion {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .panel {
+            flex: 1;
+            height: 100%;
+            transition: flex 0.5s ease-in-out;
+            position: relative;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .panel:hover {
+            flex: 3;
+        }
+
+        .panel::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .panel:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="accordion">
+        <div class="panel" style="background-image: url('https://i.pinimg.com/736x/f9/23/5e/f9235e6f37ab9c62c4da066c14dd1a18.jpg');" data-title="Whisky"></div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/236x/7f/03/7e/7f037e2bebf798c2e28c9b5400a1e9f1.jpg');" data-title="Gin"></div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/736x/1e/0a/68/1e0a683b384438d1a3a97a967fb838a5.jpg');" data-title="Ron"></div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/736x/f9/23/5e/f9235e6f37ab9c62c4da066c14dd1a18.jpg');" data-title="Whisky"></div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/236x/7f/03/7e/7f037e2bebf798c2e28c9b5400a1e9f1.jpg');" data-title="Gin"></div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/736x/1e/0a/68/1e0a683b384438d1a3a97a967fb838a5.jpg');" data-title="Ron"></div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/736x/f9/23/5e/f9235e6f37ab9c62c4da066c14dd1a18.jpg');" data-title="Whisky"></div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/236x/7f/03/7e/7f037e2bebf798c2e28c9b5400a1e9f1.jpg');" data-title="Gin"></div>
+        <div class="panel" style="background-image: url('https://i.pinimg.com/736x/1e/0a/68/1e0a683b384438d1a3a97a967fb838a5.jpg');" data-title="Ron"></div>
+    </div>
+
+</body>
+</html>
