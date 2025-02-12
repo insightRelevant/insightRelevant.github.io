@@ -1,1 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Bar Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Smooth scrolling */
+        }
 
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            z-index: 100;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff9800;
+        }
+
+        /* Hero Section with Video Background */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        #hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            margin: 0;
+            padding: 0;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background-color: #ff9800;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #e68900;
+        }
+
+        /* Servicios Section */
+        #servicios {
+            background-color: #222;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        #servicios h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .service-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .service-item {
+            width: 300px;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .service-item:hover {
+            transform: scale(1.05);
+        }
+
+        .service-popup {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .service-item:hover .service-popup {
+            opacity: 1;
+        }
+
+        .service-item a {
+            display: block;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Misión Section */
+        #mision {
+            background-color: #ff9800;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        #mision h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        #mision p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Detalles Section */
+        .detalle {
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .detalle::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Add dark overlay */
+            z-index: 0;
+        }
+
+        .detalle h3, .detalle p, .detalle .btn {
+            position: relative;
+            z-index: 1;
+        }
+
+        .detalle h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .detalle p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Carousel Section */
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            animation: scroll 20s linear infinite;
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 100px;
+            margin-right: 20px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        footer a:hover {
+            color: #ff9800;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ff9800;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <a href="#hero">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#mision">Misión</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <!-- Hero Section with Video Background -->
+    <section id="hero">
+        <video autoplay muted loop>
+            <source src="videoInicio/video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1>VIVÍ LA EXPERIENCIA OPEN BAR</h1>
+        <p>Coctelería premium para eventos exclusivos en más de 10 países.</p>
+        <button class="btn" id="download-pdf">Descargar PDF</button>
+    </section>
+    
+    <!-- Servicios Section -->
+    <section id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="service-container">
+            <div class="service-item" style="background-image: url('./imagenes/oldfashioned.jpg');">
+                <a href="#detalle-margarita">
+                    <div class="service-popup">
+                        <h2>Conoce nuestras cartas selectas</h2>
+                        <p>Cartas de Autor, recetarios y experiencias</p>
+                    </div>
+                </a>
+            </div>
+            <div class="service-item" style="background-image: url('./imagenes/piña.jpg');">
+                <a href="#detalle-pina-colada">
+                    <div class="service-popup">
+                        <h2>Nuestro equipo de trabajo</h2>
+                        <p>Contamos con más de 45 profesionales</p>
+                    </div>
+                </a>
+            </div>
+            <div class="service-item" style="background-image: url('./imagenes/redlabel.jpg');">
+                <a href="#detalle-old-fashioned">
+                    <div class="service-popup">
+                        <h2>Conoce nuestras etiquetas</h2>
+                        <p>Insumos de primera línea</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detalle Cartas Selectas Section -->
+    <section id="detalle-margarita" class="detalle" style="background-image: url('./imagenes/oldfashioned.jpg');">
+        <h3>Cartas Selectas y Recetarios Premium</h3>
+        <p>Nuestras cartas selectas y recetarios premium están diseñados para llevarte en un viaje sensorial único. Cada receta ha sido cuidadosamente elaborada por nuestros mixólogos expertos para ofrecerte una experiencia inigualable. Desde sabores exóticos hasta aromas envolventes, cada cóctel es una obra de arte que deleitará tus sentidos. Descubre la magia detrás de cada mezcla y déjate sorprender por la creatividad y la pasión que ponemos en cada detalle.</p>
+        <a href="cartas_selectas.html"><button class="btn">Conocer Más</button></a>
+    </section>
+
+    <!-- Detalle Equipo de Trabajo Section -->
+    <section id="detalle-pina-colada" class="detalle" style="background-image: url('./imagenes/piña.jpg');">
+        <h3>Nuestro Equipo de Trabajo</h3>
+        <p>Contamos con un equipo de más de 45 profesionales altamente capacitados y apasionados por la coctelería. Nuestro equipo está compuesto por mixólogos, bartenders y expertos en bebidas que se dedican a crear experiencias únicas para cada evento. La formación continua y la innovación son pilares fundamentales en nuestro trabajo, asegurando siempre la más alta calidad en nuestros servicios.</p>
+        <a href="equipo_trabajo.html"><button class="btn">Conocer Más</button></a>
+    </section>
+
+    <!-- Detalle Etiquetas Section -->
+    <section id="detalle-old-fashioned" class="detalle" style="background-image: url('./imagenes/redlabel.jpg');">
+        <h3>Conoce Nuestras Etiquetas</h3>
+        <p>En Open Bar Experience, utilizamos insumos de primera línea para garantizar la excelencia en cada cóctel. Nuestras etiquetas incluyen una cuidadosa selección de licores y destilados de alta calidad, provenientes de las mejores casas productoras del mundo. Esta dedicación a la calidad nos permite ofrecer bebidas que no solo deleitan el paladar, sino que también proporcionan una experiencia exclusiva y memorable.</p>
+        <a href="./pages/destilados.html"><button class="btn">Conocer Más</button></a>
+        
+        <!-- Carousel with Logos -->
+        <div class="carousel">
+            <div class="carousel-track">
+                <!-- Duplicate items for seamless scrolling -->
+                <div class="carousel-item"><img src="./logos/jack.png" alt="Logo 1"></div>
+                <div class="carousel-item"><img src="./logos/cinzano.png" alt="Logo 2"></div>
+                <div class="carousel-item"><img src="./logos/fireball.png" alt="Logo 3"></div>
+                <div class="carousel-item"><img src="./logos/cynar.png" alt="Logo 4"></div>
+                <div class="carousel-item"><img src="./logos/cinzano.png" alt="Logo 5"></div>
+                <div class="carousel-item"><img src="./logos/jack.png" alt="Logo 1"></div>
+                <div class="carousel-item"><img src="./logos/cinzano.png" alt="Logo 2"></div>
+                <div class="carousel-item"><img src="./logos/fireball.png" alt="Logo 3"></div>
+                <div class="carousel-item"><img src="./logos/cynar.png" alt="Logo 4"></div>
+                <div class="carousel-item"><img src="./logos/cinzano.png" alt="Logo 5"></div>
+                <div class="carousel-item"><img src="./logos/jack.png" alt="Logo 1"></div>
+                <div class="carousel-item"><img src="./logos/cinzano.png" alt="Logo 2"></div>
+                <div class="carousel-item"><img src="./logos/fireball.png" alt="Logo 3"></div>
+                <div class="carousel-item"><img src="./logos/cynar.png" alt="Logo 4"></div>
+                <div class="carousel-item"><img src="./logos/cinzano.png" alt="Logo 5"></div>
+                <div class="carousel-item"><img src="./logos/jack.png" alt="Logo 1"></div>
+                <div class="carousel-item"><img src="./logos/cinzano.png" alt="Logo 2"></div>
+                <div class="carousel-item"><img src="./logos/fireball.png" alt="Logo 3"></div>
+                <div class="carousel-item"><img src="./logos/cynar.png" alt="Logo 4"></div>
+                <div class="carousel-item"><img src="./logos/cinzano.png" alt="Logo 5"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misión Section -->
+    <section id="mision">
+        <h3>Nuestra Misión</h3>
+        <p>En Open Bar Experience, nos dedicamos a ofrecer una experiencia única de coctelería premium para eventos exclusivos. Con más de 10 años en el mercado, nuestros servicios están presentes en más de 10 países, llevando la mejor calidad y creatividad a cada evento. Nos especializamos en crear momentos inolvidables con bebidas innovadoras y un servicio de alto nivel. ¡Vení, viví la experiencia con nosotros!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Open Bar Experience. Todos los derechos reservados.</p>
+        <a href="#contacto">Contacto</a>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Optional: Add smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Function to download the PDF
+        document.getElementById('download-pdf').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+
+            html2canvas(document.body, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('open-bar-experience.pdf');
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    </html>
+</body>
